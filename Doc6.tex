@@ -290,6 +290,20 @@ A tabela 1 apresenta resultados das normas dos erros em algumas das simulações
 
 Pelo fato das contas conterem aproximações, os erros para $\lambda \leq 0.5$ não resultam em 0 exatamente no instante $t=1$. Este fato faz com que o erro aumente à medida que $N$ aumenta, conforme é visto na tabela acima. Vale ressaltar que, na verdade, o erro não está aumentando verdadeiramente, esse aumento indevido é resultado das aproximações feitas durante os cálculos.
 
+Vamos verificar que o erro de truncamento $\tau$ (que neste caso é igual à norma do erro) é zero. Para isso, vamos definir o erro de truncamento como:
+
+$$
+\tau^k_i(\Delta t, \Delta x) = \Delta t \frac{u_{tt}(\overline{t}_k,x_i)}{2} - \Delta x^2 \frac{u_{xxxx}(t_k, \overline{x}_i)}{4!}
+$$
+
+Para $u(t,x)=10tx^2(x-1):$
+
+$$
+u_{tt}=0 \hspace{3.5pt} e \hspace{3.5pt} u_{xxxx}=0, \forall \ t_k, x_i \Rightarrow \tau^k_i(\Delta t, \Delta x)=0 \ \forall \Delta t, \Delta x 
+$$
+
+Dessa forma, constata-se, matematicamente, que o erro de truncamento é nulo. Apesar disso, conforme dito acima, quando calcula-se este erro computacionalmente isso não é verificado devido aos erros de arredondamento.
+
 Em seguida nos foi dado a fonte:
 
 $$f(t, x) = 10cos(10t)x^{2}(1-x)^{2}-(1+sin(10t))(12x^{2}-12x+2)$$
