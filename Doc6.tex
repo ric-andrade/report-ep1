@@ -885,13 +885,27 @@ Nos itens a seguir iremos explicar como é feita a decomposição da matriz $A$ 
 
 \subsubsection{Item (a)}
 
-Inicialmente é preciso decompor a matriz $A$. Para isso, foi criada uma função \\ \textit{decomp(vet1, vet2)} $\rightarrow$ \textit{(vet\_d, vet\_l)} que recebe os vetores \textit{vet1} e \textit{vet2}, os quais representam a diagonal principal e a subdiagonal da matriz $A$; e retorna os vetores \textit{vet\_d} e \textit{vet\_l}, os quais representam as matrizes $D$ e $L$ respectivamente.
+Inicialmente é preciso decompor a matriz $A$. Para isso, foi criada uma função \\ \textit{decomp(vet1, vet2)} $\rightarrow$ \textit{(vet\_d, vet\_l)} que recebe os vetores \textit{vet1} e \textit{vet2}, os quais representam a diagonal principal e a subdiagonal da matriz $A$; e retorna os vetores \textit{vet\_d} e \textit{vet\_l}, os quais representam as matrizes $D$ e $L$ respectivamente. O código implementado se encontra abaixo:
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.5]{img/decomp.png}
-	\caption{\textit{Função decomp}}
-\end{figure}
+Obs.: A descrição completa desta função e da próxima (docstrings) se encontram no código fonte.
+
+\begin{verbatim}
+def decomp(vet1, vet2):
+        
+    vet_d = crie_vetor(len(vet1))
+    vet_l = crie_vetor(len(vet2))
+
+    vet_d[0] = vet1[0]
+    
+    h = 0
+    while h < n - 2:
+        vet_l[h] = vet2[h] / vet_d[h]
+        vet_d[h + 1] = vet1[h + 1] - (vet_l[h] ** 2) * vet_d[h]
+    
+        h += 1
+
+return [vet_d, vet_l]
+\end{verbatim}
 
 Com a matriz $A$ decomposta e tendo os vetores que representam as matrizes $D$ e $L$, podemos implementar a rotina que resolve o sistema desejado. Para a implementação desta rotina recorreu-se ao livro base da disciplina \textbf{Burden \& Faires - Análise Numérica}, onde o autor descreve um pseudo-código que resolve o sistema linear. A resolução do sistema ocorre em 3 etapas:
 
@@ -905,13 +919,31 @@ Com a matriz $A$ decomposta e tendo os vetores que representam as matrizes $D$ e
 
 \end{enumerate}
 
-Foi criada, então, uma função \textit{solve\_sys} que recebe os 4 vetores que caracterizam o sistema linear e retorna o vetor solução. 
+Foi criada, então, uma função \textit{solve\_sys} que recebe os 4 vetores que caracterizam o sistema linear e retorna o vetor solução:
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.5]{img/solve_sys.png}
-	\caption{\textit{Função solve\_sys}}
-\end{figure}
+\begin{verbatim}
+def solve_sys(unew, vet_l, vet_d, vet_dir):
+
+    y = crie_vetor(n - 1)  # Resolução do sistema Ly = b
+
+    y[0] = vet_dir[1]
+
+    for i in range(1, n - 1):
+        y[i] = vet_dir[i + 1] - vet_l[i - 1] * y[i - 1]
+
+    z = crie_vetor(n - 1)  # Resolução do sistema Dz = y
+
+    for o in range(n - 1):
+        z[o] = y[o] / vet_d[o]
+
+    unew[n - 1] = z[n - 2]
+
+    for q in range(n - 2, 0, -1):  # Resolução do sistema L^t x = z
+
+        unew[q] = z[q - 1] - vet_l[q - 1] * unew[q + 1]
+
+    return unew
+\end{verbatim}
 
 Tendo essas duas rotinas criadas, somos capazes de implementar os 2 métodos implícitos pedidos.
 
