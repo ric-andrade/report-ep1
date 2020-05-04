@@ -1311,8 +1311,15 @@ Tendo em vista as considerações feitas no item anterior, vamos então à apres
 
 \section{Conclusões e comentários finais}
 
+Ao final deste relatório, podemos destacar os principais resultados obtidos, as dificuldades enfrentadas e comentar sobre as próximas etapas deste exercício programa. Em primeiro lugar, apesar do objetivo do estudo estar mais relacionado com a análise numérica em si do que com a física envolvida, é válido relembrar que o problema físico em questão é a propagação de calor numa barra, a partir de diferentes fontes e condições de contorno.
 
+Conforme comentado no item (a) da primeira tarefa, o método de discretização da equação do calor (Euler explícito) possui uma deficiência quando comparado com os demais métodos: O número de passos necessários cresce muito conforme aumentamos $N$. A segunda tarefa abordou métodos implícitos, os quais permitiram alcançar resultados tão bons quanto o método anterior (ordens de grandeza similares) porém com bem menos passos para malhas mais refinadas. Ainda assim, devemos analisar cuidadosamente essa vantagem pois o acréscimo computacional de se aplicar um método implícito pode ser muitas vezes considerável. Ademais, a estabilidade dos métodos implícitos não possuem dependência do parâmetro $\lambda$, como acontece com o método discretizado, e assim a estabilidade numérica passou a ser menos restrita.
 
+Para que houvesse um maior entendimento sobre o comportamento do erro e eficiência, foi importante compreender as condições de convergência para cada método. Na prática, o fato de o método explícito ser condicionalmente convergente de ordem 2 em $\Delta x$ implicou que o fator de redução da norma do erro a cada vez que dobramos $N$ foi de $\frac{1}{4}$. Já para o método de Euler implícito, que é um método de ordem 2 em $\Delta x$ e ordem 1 em $\Delta t$, constatou-se que ao dobrar $N$ é esperado que o erro caia pela metade. Finalmente, para o método de Crank-Nicolson, que é um método de ordem 2 em $\Delta t$ e em $\Delta x$, ao dobrar $N$ é esperado que o erro se reduza em $\frac{1}{4}$.
+
+Ao longo de todo o exercício, a dupla visualizou na prática alguns dos problemas estudados em sala de aula, especialmente quanto aos erros de arredondamento e truncamento. Nesse sentido, no item (a) do exercício 1, foram obtidos resultados contra-intuitivos: o valor do erro aumenta conforme a malha vai sendo cada vez mais refinada. Além disso, muitas vezes foi possível se deparar com números de baixíssima ordem de grandeza mas que idealmente deveriam ser nulos. Problemas relacionados ao crescimento extraordinário do erro (instabilidade do método) também foram vistos, obtendo-se inclusive números maiores do que o que a linguagem de programação consegue interpretar.
+
+Sendo assim, podemos concluir que os objetivos do primeiro Exercício Programa (EP1) da disciplina foram contemplados pela dupla, uma vez que foram estudados, implementados e analisados métodos explícito e implícitos para aproximações da equação diferencial parcial do calor. Indo além da análise numérica, os métodos aqui estudados possuem diversas aplicações para problemas físicos enfrentados frequentemente na Engenharia (como é o caso da equação do calor), justificando assim a importância desse estudo. Por fim, espera-se que os conhecimentos desenvolvidos no EP1 possam ser bem utilizados pela dupla no próximo exercício, onde será proposto um problema inverso relacionado à equação do calor.
 
 
 \section{Anexos, listas de tabelas e figuras}
@@ -1322,6 +1329,7 @@ Tendo em vista as considerações feitas no item anterior, vamos então à apres
 
 \listoffigures
 
+\newpage
 
 \section{Bibliografia}
 
@@ -1330,7 +1338,7 @@ Tendo em vista as considerações feitas no item anterior, vamos então à apres
 	
 	\item Burden \& Faires - Análise Numérica - tradução da 10ª edição;
 	
-	\item Noções de Cálculo Numérico;
+	\item Noções de Cálculo Numérico.
 
 	
 \end{itemize}
