@@ -97,13 +97,13 @@ Onde $t$ é a variável temporal e $x$ a variável espacial. Usa-se a seguinte n
 
 $$u_{xx}(t,x)=\frac{\partial^{2}u(t,x)}{\partial x^2}$$
 
-O comprimento da barra foi normalizado para $1$ e integrar-se-á a equação num intervalo de tempo de $0$ a $T$. A variável $u(t,x)$ descreve a temperatura no instante $t$ e na posição $x$. Nota-se que as condições de contorno (3) e (4) denotam-se condições de fronteira, enquanto a condição (2) trata-se da temperatura no instante inicial para cada posição $x$. A função $f$ descreve as fontes de calor ao longo do tempo.
+O comprimento da barra foi normalizado para $1$ e integrar-se-á a equação num intervalo de tempo de $0$ à $T$. A variável $u(t,x)$ descreve a temperatura no instante $t$ e na posição $x$. Nota-se que as condições de contorno (3) e (4) denotam-se condições de fronteira, enquanto a condição (2) trata-se da temperatura no instante inicial para cada posição $x$. A função $f$ descreve as fontes de calor ao longo do tempo.
 
 \subsection{Discretizações da equação do calor}
 
 Desejamos aproximar numericamente a solução de (1)-(4). Para isso, vamos aproximar as derivadas parciais pelo método das \textit{diferenças finitas}, que são baseadas em expansões de Taylor. 
 
-Para a discretização da equação do calor introduzir-se-á uma malha espacial dada pelos pontos $x_{i} = i\Delta x$, $i=0, \dots ,N$, com $\Delta x=\frac{1}{N}$. Para a discretização temporal definimos $\Delta t =\frac{T}{M}$, e calculamos aproximações nos instantes $t_{k}=k\Delta t$, $k=1, \dots,M$. Denotaremos a aproximação para a solução nos pontos de malha $u(t_{k},x_{i})$ por $u_{i}^k$. 
+Para a discretização da equação do calor introduzir-se-á uma malha espacial dada pelos pontos $x_{i} = i\Delta x$, $i=0, \cdots ,N$, com $\Delta x=\frac{1}{N}$. Para a discretização temporal definimos $\Delta t =\frac{T}{M}$, e calculamos aproximações nos instantes $t_{k}=k\Delta t$, $k=1, \cdots,M$. Denotaremos a aproximação para a solução nos pontos de malha $u(t_{k},x_{i})$ por $u_{i}^k$. 
 
 Desta forma teremos a condição inicial dada por:
 
@@ -113,13 +113,13 @@ Ao longo da evolução temporal as condições de fronteira são dadas por:
 
 $$ u_{0}^k	= g_{1}(t_{k}) \hspace{0.2cm} e \hspace{0.2cm} u_{N}^k	= g_{2}(t_{k}), \hspace{0.2cm} k=1,\cdots,M	$$
 
-Para os pontos interiores a evolução é aproximada pelas fórmulas de diferenças finitas:
+Para os pontos interiores a evolução é aproximada pela fórmula de diferenças finitas:
 
 \begin{eqnarray}
 u_{i}^{k+1} & = & u_{i}^{k} + \Delta t (\frac{u_{i-1}^{k}-2u_{i}^{k}+u_{i+1}^{k}}{\Delta x^2}+f(x_i,t_k)), \hspace{0.2cm} i=1,\cdots,N-1, \hspace{0.2cm} k=0,\cdots,M-1 \hspace{1cm}
 \end{eqnarray}
 
-Dadas as condições de contorno do problema a expressão (5) permite a determinação da solução aproximada em todos os instantes e em todas as posições, computando sequencialmente desde $t_0=0$ a $t_M=T$. 
+Dadas as condições de contorno do problema, a expressão (5) permite a determinação da solução aproximada em todos os instantes e em todas as posições, computando sequencialmente desde $t_0=0$ a $t_M=T$. 
 
 \textbf{Convergência da solução}
 
@@ -257,7 +257,7 @@ $$
 Nesta primeira tarefa foram propostas 3 diferentes situações a serem analisadas, uma para cada item ($a$, $b$ ou $c$). Em todos os 3 casos foi fixado o valor $T = 1$ e todos os resultados estão apresentados detalhadamente nos próximos tópicos.
 
 \subsubsection{Item (a)}
-No item $a$, primeiro utilizamos a fonte $f(t, x) = 10x^2({x-1}) -60xt + 20t$ com condições de contorno e fronteira nulas, isto é, $u(0,x) = u(t,0) = u(t,1) = 0$. Para estas condições constatamos a solução exata como $u(t, x) = 10tx^{2}({x-1})$ e calculamos as normas dos erros dadas pela fórmula (6) para o instante $t=1$. 
+No item $a$, primeiro utilizamos a fonte $f(t, x) = 10x^2({x-1}) -60xt + 20t$ com condições de contorno e fronteira nulas, isto é, $u(0,x) = u(t,0) = u(t,1) = 0$. Para estas condições constatamos a solução exata como $u(t, x) = 10tx^{2}({x-1})$ e calculamos as normas dos erros dadas pela fórmula (7) para o instante $t=1$. 
 
 % Lambda igual a 0.5 e N igual a 160
 \begin{figure}[H]
@@ -268,7 +268,7 @@ No item $a$, primeiro utilizamos a fonte $f(t, x) = 10x^2({x-1}) -60xt + 20t$ co
 	\caption{\textit{$N = 160$, $\lambda$ = 0.5}}
 \end{figure}
 
-A tabela 1 apresenta resultados das normas dos erros em algumas das simulações.
+A tabela 1 apresenta os resultados das normas dos erros em algumas das simulações.
 
 % Colocar tabela com erros para cada simulação, com T=1, e diferentes resoluções de lambda
 \begin{table}[!h]
@@ -292,7 +292,7 @@ A tabela 1 apresenta resultados das normas dos erros em algumas das simulações
 
 Pelo fato das contas conterem aproximações, os erros para $\lambda \leq 0.5$ não resultam em 0 exatamente no instante $t=1$. Este fato faz com que o erro aumente à medida que $N$ aumenta, conforme é visto na tabela acima. Vale ressaltar que, na verdade, o erro não está aumentando verdadeiramente, esse aumento indevido é resultado das aproximações feitas durante os cálculos.
 
-Vamos verificar que o erro de truncamento $\tau$ (que neste caso é igual à norma do erro) é zero. Para isso, vamos definir o erro de truncamento como:
+Vamos verificar que o erro de truncamento $\tau$ (que neste caso é igual à norma do erro) é zero. O erro de truncamento é dado por:
 
 $$
 \tau^k_i(\Delta t, \Delta x) = \Delta t \frac{u_{tt}(\overline{t}_k,x_i)}{2} - \Delta x^2 \frac{u_{xxxx}(t_k, \overline{x}_i)}{4!}
@@ -963,7 +963,7 @@ $$
 
 Note que a última passagem vem do fato de que $\Delta t = \Delta x$ $\Rightarrow$ $\frac{M}{T} = N$.
 
-Portanto, em tempo de execução, o usuário só determina o parâmetro $N=\lambda$ e o parâmetro $M$ é determinado por $M=NT$. Para efeitos de testes iremos utilizar $T=1$ $\Rightarrow$ $M=N$, porém o programa foi configurado para receber qualquer valor positivo $T$.
+Portanto, em tempo de execução, o usuário só determina o parâmetro $N=\lambda$. Já o parâmetro $M$ é determinado por $M=NT$. Para efeitos de testes iremos utilizar $T=1$ $\Rightarrow$ $M=N$, porém o programa foi configurado para receber qualquer valor positivo $T$.
 
 Dito isso, vamos então à apresentação dos gráficos para o método de \textit{Euler implícito}:
 
